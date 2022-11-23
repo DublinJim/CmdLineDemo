@@ -27,6 +27,9 @@ public class HelloController implements Initializable {
     private Label popupLbl2;
     private Stage stage;
 
+
+
+
     public void dosCommand() throws IOException {
 
 
@@ -46,6 +49,7 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("first");
         stage = HelloApplication.myStage;
         txt1.setVisible(false);
 
@@ -54,7 +58,6 @@ public class HelloController implements Initializable {
     }
 
     public void popUpWindow(ActionEvent actionEvent) {
-
 
         popupLbl = new Label("Warning");
         popupLbl.setPadding(new Insets(10.0));
