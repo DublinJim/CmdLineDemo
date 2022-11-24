@@ -2,7 +2,7 @@ package com.example.cmdlinedemo;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -22,10 +22,12 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
+    private static Stage popStage;
     public Button Btn1;
     public Text txt1;
-    @FXML
     public Button btnRestart;
+    public static Button btnCancel;
+
     private String[] cmdArray;
     private Runtime runtime;
     private Process process;
@@ -33,6 +35,17 @@ public class HelloController implements Initializable {
     private Label popupLbl;
     private Label popupLbl2;
     private Stage stage;
+
+    private static void loadPop() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        popStage = new Stage();
+        popStage.setTitle("popup");
+        popStage.setScene(scene);
+        popStage.show();
+
+
+    }
 
     public void dosCommand() throws IOException {
 
@@ -55,7 +68,7 @@ public class HelloController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("first");
         stage = HelloApplication.myStage;
-        txt1.setVisible(false);
+
         popupLbl = new Label("Warning");
         popup = new Popup();
         runtime = Runtime.getRuntime();
@@ -104,12 +117,22 @@ public class HelloController implements Initializable {
     }
 
     public void loadFxmlPopup(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("popup");
-        stage.setScene(scene);
-        stage.show();
+        loadPop();
 
     }
+
+    public void restartAll(ActionEvent actionEvent) {
+        Platform.exit();
+
+    }
+
+    public void cancelAll(ActionEvent actionEvent) {
+popStage.hide();
+
+    }
+
+    public void shutTheMainStage() {
+        HelloApplication.myStage.hide();
+    }
+
 }
