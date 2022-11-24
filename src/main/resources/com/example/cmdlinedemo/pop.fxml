@@ -4,28 +4,35 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="603.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cmdlinedemo.HelloController">
-   <Button fx:id="btnRestart" layoutX="108.0" layoutY="175.0" mnemonicParsing="false" onAction="#loadCheckPop" text="Restart" />
-   <Button fx:id="btnCancel" layoutX="460.0" layoutY="175.0" mnemonicParsing="false" onAction="#cancelPop" text="Cancel" />
-   <Text fill="#ee0b0b" layoutX="226.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warning !" textAlignment="CENTER">
-      <font>
-         <Font size="34.0" />
-      </font>
-   </Text>
-   <Text layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In order to reset to defaults the application needs to be shut down and restarted. " textAlignment="CENTER" wrappingWidth="603.0">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Text>
-   <Text fill="#d04141" layoutX="222.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Any unsaved work will be lost.">
-      <font>
-         <Font size="13.0" />
-      </font>
-   </Text>
-   <ImageView fitHeight="65.0" fitWidth="200.0" layoutX="263.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../../../graphic/caution-icon.png" />
-   </ImageView>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0"
+            prefWidth="603.0" style="-fx-border-color: black; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cmdlinedemo.HelloController">
+    <Button fx:id="btnRestart" layoutX="108.0" layoutY="175.0" mnemonicParsing="false" onAction="#loadCheckPop"
+            text="Restart"/>
+    <Button fx:id="btnCancel" layoutX="460.0" layoutY="175.0" mnemonicParsing="false" onAction="#cancelPop"
+            text="Cancel"/>
+    <Text fill="#ee0b0b" layoutX="226.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warning !"
+          textAlignment="CENTER">
+        <font>
+            <Font size="34.0"/>
+        </font>
+    </Text>
+    <Text layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="In order to reset to defaults the application needs to be shut down and restarted. "
+          textAlignment="CENTER" wrappingWidth="603.0">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Text>
+    <Text fill="#d04141" layoutX="222.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Any unsaved work will be lost.">
+        <font>
+            <Font size="13.0"/>
+        </font>
+    </Text>
+    <ImageView fitHeight="65.0" fitWidth="200.0" layoutX="263.0" layoutY="155.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../../graphic/caution-icon.png"/>
+    </ImageView>
 </AnchorPane>

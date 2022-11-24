@@ -24,13 +24,12 @@ public class HelloController implements Initializable {
 
     private static Stage popStage;
     private static Stage popStageFail;
-
+    private Stage mainAppStage;
     public Text txt1;
-
     private Runtime runtime;
     private Popup popup;
     private Label popupLbl;
-    private Stage stage;
+
 
     private static void loadPop() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
@@ -62,9 +61,10 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        stage = HelloApplication.myStage;
+        mainAppStage = HelloApplication.myStage;
         popupLbl = new Label("Warning");
         popup = new Popup();
+
         runtime = Runtime.getRuntime();
     }
 
@@ -84,8 +84,8 @@ public class HelloController implements Initializable {
         optContainer.setPadding(new Insets(10));
         optContainer.setSpacing(10.0);
         popup.getContent().add(optContainer);
-        stage = HelloApplication.myStage;
-        popup.show(stage);
+        mainAppStage = HelloApplication.myStage;
+        popup.show(mainAppStage);
         noBtn.setOnAction(actionEvent1 -> {
             popup.hide();
             System.out.println("in func");
@@ -102,8 +102,8 @@ public class HelloController implements Initializable {
         secondPopUpButton.setPadding(new Insets(10));
         VBox optContainer = new VBox(secondPopUpButton, popupLbl);
         popup.getContent().add(optContainer);
-        stage = HelloApplication.myStage;
-        popup.show(stage);
+        mainAppStage = HelloApplication.myStage;
+        popup.show(mainAppStage);
         System.out.println("done");
     }
 
