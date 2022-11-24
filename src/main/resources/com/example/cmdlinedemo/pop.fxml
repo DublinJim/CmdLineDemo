@@ -8,8 +8,8 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="603.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cmdlinedemo.HelloController">
-   <Button fx:id="btnRestart" layoutX="108.0" layoutY="175.0" mnemonicParsing="false" onAction="#restartAll" text="Restart" />
-   <Button fx:id="btnCancel" layoutX="460.0" layoutY="175.0" mnemonicParsing="false" onAction="#cancelAll" text="Cancel" />
+   <Button fx:id="btnRestart" layoutX="108.0" layoutY="175.0" mnemonicParsing="false" onAction="#loadCheckPop" text="Restart" />
+   <Button fx:id="btnCancel" layoutX="460.0" layoutY="175.0" mnemonicParsing="false" onAction="#cancelPop" text="Cancel" />
    <Text fill="#ee0b0b" layoutX="226.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warning !" textAlignment="CENTER">
       <font>
          <Font size="34.0" />

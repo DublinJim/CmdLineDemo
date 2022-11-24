@@ -24,6 +24,7 @@ public class HelloController implements Initializable {
 
     public static Button btnCancel;
     private static Stage popStage;
+    private static Stage popStageFail;
     public Button Btn1;
     public Text txt1;
     public Button btnRestart;
@@ -45,10 +46,11 @@ public class HelloController implements Initializable {
         popStage.show();
 
     }
-private static void loadCheck()
-{
 
-}
+    private static void loadCheck() {
+
+    }
+
     public void dosCommand() throws IOException {
 
 
@@ -125,6 +127,28 @@ private static void loadCheck()
     public void cancelAll(ActionEvent actionEvent) {
         popStage.hide();
 
+
+
     }
 
+    public void loadCheckPop(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("failsafePop.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+         popStageFail = new Stage();
+        popStageFail.initStyle(StageStyle.UNDECORATED);
+        popStageFail.setTitle("popup");
+        popStageFail.setScene(scene);
+        popStageFail.show();
+
+    }
+
+    public void cancelPop(ActionEvent actionEvent) {
+        popStage.hide();
+
+    }
+
+    public void cancelFailpop(ActionEvent actionEvent) {
+        popStageFail.hide();
+        popStage.hide();
+    }
 }
