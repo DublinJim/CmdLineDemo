@@ -21,12 +21,12 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-    public static Button btnCancel;
+
     private static Stage popStage;
     private static Stage popStageFail;
-    public Button Btn1;
+
     public Text txt1;
-    public Button btnRestart;
+
     private Runtime runtime;
     private Popup popup;
     private Label popupLbl;
