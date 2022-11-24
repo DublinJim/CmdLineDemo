@@ -1,7 +1,6 @@
 package com.example.cmdlinedemo;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -28,12 +27,9 @@ public class HelloController implements Initializable {
     public Button Btn1;
     public Text txt1;
     public Button btnRestart;
-    private String[] cmdArray;
     private Runtime runtime;
-    private Process process;
     private Popup popup;
     private Label popupLbl;
-    private Label popupLbl2;
     private Stage stage;
 
     private static void loadPop() throws IOException {
@@ -47,22 +43,19 @@ public class HelloController implements Initializable {
 
     }
 
-    private static void loadCheck() {
 
-    }
 
     public void dosCommand() throws IOException {
 
 
-        cmdArray = new String[2];
+        String[] cmdArray = new String[2];
         cmdArray[0] = "notepad.exe";
         cmdArray[1] = "NewText.txt";
-
+        System.out.println("[Dos commands run]");
         Arrays.stream(cmdArray).forEach(System.out::println);
-        process = runtime.exec(cmdArray);
+        Process pr = runtime.exec(cmdArray);
         txt1.setVisible(true);
         txt1.setText("Notepad opens and a new file " + cmdArray[1] + " is created ");
-
 
     }
 
@@ -100,7 +93,7 @@ public class HelloController implements Initializable {
         });
     }
 
-    public void popUpWindowVbox(ActionEvent actionEvent) {
+    public void popUpWindowVbox() {
 //here we go
 
         popupLbl.setText("2nd label");
@@ -114,27 +107,22 @@ public class HelloController implements Initializable {
         System.out.println("done");
     }
 
-    public void loadFxmlPopup(ActionEvent actionEvent) throws IOException {
+    public void loadFxmlPopup() throws IOException {
         loadPop();
 
     }
 
-    public void restartAll(ActionEvent actionEvent) {
+    public void restartAll() {
         Platform.exit();
 
     }
 
-    public void cancelAll(ActionEvent actionEvent) {
-        popStage.hide();
 
 
-
-    }
-
-    public void loadCheckPop(ActionEvent actionEvent) throws IOException {
+    public void loadCheckPop() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("failsafePop.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-         popStageFail = new Stage();
+        popStageFail = new Stage();
         popStageFail.initStyle(StageStyle.UNDECORATED);
         popStageFail.setTitle("popup");
         popStageFail.setScene(scene);
@@ -142,12 +130,12 @@ public class HelloController implements Initializable {
 
     }
 
-    public void cancelPop(ActionEvent actionEvent) {
+    public void cancelPop() {
         popStage.hide();
 
     }
 
-    public void cancelFailpop(ActionEvent actionEvent) {
+    public void cancelFailpop() {
         popStageFail.hide();
         popStage.hide();
     }
