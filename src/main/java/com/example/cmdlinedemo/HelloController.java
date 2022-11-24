@@ -31,6 +31,18 @@ public class HelloController implements Initializable {
     private Label popupLbl;
 
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        mainAppStage = HelloApplication.myStage;
+        popupLbl = new Label("Warning");
+        popup = new Popup();
+        System.out.println("Initialised");
+        runtime = Runtime.getRuntime();
+    }
+
+
     private static void loadPop() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -58,15 +70,7 @@ public class HelloController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        mainAppStage = HelloApplication.myStage;
-        popupLbl = new Label("Warning");
-        popup = new Popup();
-
-        runtime = Runtime.getRuntime();
-    }
 
     public void popUpWindow() {
 
@@ -137,6 +141,6 @@ public class HelloController implements Initializable {
 
     public void cancelFailpop() {
         popStageFail.hide();
-        popStage.hide();
+        cancelPop();
     }
 }
