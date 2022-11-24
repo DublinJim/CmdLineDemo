@@ -1,10 +1,15 @@
 package com.example.cmdlinedemo;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
@@ -19,6 +24,8 @@ public class HelloController implements Initializable {
 
     public Button Btn1;
     public Text txt1;
+    @FXML
+    public Button btnRestart;
     private String[] cmdArray;
     private Runtime runtime;
     private Process process;
@@ -26,9 +33,6 @@ public class HelloController implements Initializable {
     private Label popupLbl;
     private Label popupLbl2;
     private Stage stage;
-
-
-
 
     public void dosCommand() throws IOException {
 
@@ -52,42 +56,60 @@ public class HelloController implements Initializable {
         System.out.println("first");
         stage = HelloApplication.myStage;
         txt1.setVisible(false);
-
+        popupLbl = new Label("Warning");
         popup = new Popup();
         runtime = Runtime.getRuntime();
     }
 
-    public void popUpWindow(ActionEvent actionEvent) {
+    public void popUpWindow() {
 
-        popupLbl = new Label("Warning");
+        popupLbl.setText("Warning.  selecting Close will end the application");
         popupLbl.setPadding(new Insets(10.0));
-        Button noBtn = new Button("Option 1");
+        Button noBtn = new Button("Close");
         Button yesBtn = new Button("Option 2");
 
         noBtn.setPadding(new Insets(10));
         yesBtn.setPadding(new Insets(10));
         popupLbl.setMinWidth(50);
         popupLbl.setMinHeight(50);
-        popupLbl.setStyle("-fx-background-color: blue;");
+        popupLbl.setStyle("-fx-background-color: gray;");
 
-        VBox optContainer = new VBox(noBtn, yesBtn, popupLbl);
+        HBox optContainer = new HBox(noBtn, yesBtn, popupLbl);
+
+        optContainer.setPrefSize(880, 220);
+        optContainer.setPadding(new Insets(10));
+        optContainer.setSpacing(10.0);
         popup.getContent().add(optContainer);
         stage = HelloApplication.myStage;
         popup.show(stage);
+        noBtn.setOnAction(actionEvent1 -> {
+            popup.hide();
+            System.out.println("in func");
+            Platform.exit();
+        });
     }
 
     public void popUpWindowVbox(ActionEvent actionEvent) {
 //here we go
-        Popup popup2 = new Popup();
-        popupLbl2 = new Label("Second label");
+
+        popupLbl.setText("2nd label");
 
         Button secondPopUpButton = new Button("new button");
         secondPopUpButton.setPadding(new Insets(10));
-        VBox optContainer = new VBox(secondPopUpButton,popupLbl2);
-        popup2.getContent().add(optContainer);
-
+        VBox optContainer = new VBox(secondPopUpButton, popupLbl);
+        popup.getContent().add(optContainer);
         stage = HelloApplication.myStage;
-        popup2.show(stage);
+        popup.show(stage);
         System.out.println("done");
+    }
+
+    public void loadFxmlPopup(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("popup");
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
