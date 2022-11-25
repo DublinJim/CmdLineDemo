@@ -28,13 +28,7 @@ public class HelloController implements Initializable {
     private static void loadPop() throws IOException {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        popStage = new Stage();
-        popStage.initStyle(StageStyle.UNDECORATED);
-        popStage.setTitle("popup");
-        popStage.setScene(scene);
-        popStage.show();
+     stageSwitcher("pop.fxml");
 
     }
 
@@ -49,14 +43,12 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        mainAppStage = HelloApplication.myStage;
         popStage = new Stage();
         runtime = Runtime.getRuntime();
         testDir = new File("Desktop");
     }
 
     public void dosCommand() throws IOException {
-
 
         String[] cmdArray = new String[2];
         cmdArray[0] = "notepad.exe";
@@ -98,7 +90,6 @@ public class HelloController implements Initializable {
     public void makeDir() {
 
         testDir = new File("Desktop");
-
         testDir.mkdir();
         popStage.hide();
 
@@ -111,9 +102,7 @@ public class HelloController implements Initializable {
     }
 
     public void loadPopout() throws IOException {
-
-        fxml = "reuse.fxml";
-        stageSwitcher(fxml);
+        stageSwitcher("reuse.fxml");
     }
 
 }
