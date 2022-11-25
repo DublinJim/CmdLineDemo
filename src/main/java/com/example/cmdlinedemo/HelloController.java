@@ -4,9 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -24,8 +22,7 @@ public class HelloController implements Initializable {
     private File testDir;
     private Stage mainAppStage;
     private Runtime runtime;
-    private Popup popup;
-    private Label popupLbl;
+
 
     private static void loadPop() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
@@ -42,8 +39,7 @@ public class HelloController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         mainAppStage = HelloApplication.myStage;
-        popupLbl = new Label("Warning");
-        popup = new Popup();
+
         System.out.println("Initialised");
         runtime = Runtime.getRuntime();
         testDir = new File("Desktop");
@@ -64,8 +60,6 @@ public class HelloController implements Initializable {
     }
 
 
-
-
     public void loadFxmlPopup() throws IOException {
         loadPop();
 
@@ -82,7 +76,6 @@ public class HelloController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load());
         popStageFail = new Stage();
         popStageFail.initStyle(StageStyle.UNDECORATED);
-        popStageFail.setTitle("popup");
         popStageFail.setScene(scene);
         popStageFail.show();
 
@@ -108,7 +101,7 @@ public class HelloController implements Initializable {
     }
 
     public void deleteDir() {
-        System.out.println("delete func");
+
         testDir.delete();
 
     }
