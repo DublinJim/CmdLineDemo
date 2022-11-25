@@ -1,7 +1,6 @@
 package com.example.cmdlinedemo;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -19,6 +18,7 @@ public class HelloController implements Initializable {
 
     private static Stage popStage;
     private static Stage popStageFail;
+    public String fxml;
     public Text txt1;
     private File testDir;
     private Stage mainAppStage;
@@ -26,6 +26,8 @@ public class HelloController implements Initializable {
 
 
     private static void loadPop() throws IOException {
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         popStage = new Stage();
@@ -36,12 +38,19 @@ public class HelloController implements Initializable {
 
     }
 
+    private static void stageSwitcher(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));
+        Scene scene = new Scene(fxmlLoader.load());
+        popStage.setScene(scene);
+        popStage.initStyle(StageStyle.UNDECORATED);
+        popStage.show();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         mainAppStage = HelloApplication.myStage;
-popStage= new Stage();
-        System.out.println("Initialised");
+        popStage = new Stage();
         runtime = Runtime.getRuntime();
         testDir = new File("Desktop");
     }
@@ -60,7 +69,6 @@ popStage= new Stage();
 
     }
 
-
     public void loadFxmlPopup() throws IOException {
         loadPop();
 
@@ -71,15 +79,10 @@ popStage= new Stage();
 
     }
 
-
     public void loadCheckPop() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("failsafePop.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        popStageFail = new Stage();
-        popStageFail.initStyle(StageStyle.UNDECORATED);
-        popStageFail.setScene(scene);
-        popStageFail.show();
 
+        fxml="failsafePop.fxml";
+        stageSwitcher(fxml);
     }
 
     public void cancelPop() {
@@ -88,7 +91,7 @@ popStage= new Stage();
     }
 
     public void cancelFailpop() {
-        popStageFail.hide();
+        popStage.hide();
         cancelPop();
     }
 
@@ -108,13 +111,9 @@ popStage= new Stage();
     }
 
     public void loadPopout() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("reuse.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-      //  Stage stage = new Stage();
-        popStage.setScene(scene);
-        popStage.initStyle(StageStyle.UNDECORATED);
-        popStage.show();
 
-
+        fxml = "reuse.fxml";
+        stageSwitcher(fxml);
     }
+
 }
