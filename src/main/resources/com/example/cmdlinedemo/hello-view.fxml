@@ -18,7 +18,7 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </VBox.margin>
         </Button>
-        <Button mnemonicParsing="false" onAction="#popUpWindow" prefHeight="37.0" prefWidth="85.0" text="PopUp">
+        <Button mnemonicParsing="false"  prefHeight="37.0" prefWidth="85.0" text="Make Dir" onAction="#makeDir">
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
@@ -26,8 +26,8 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </VBox.margin>
         </Button>
-        <Button mnemonicParsing="false" onAction="#popUpWindowVbox" prefHeight="37.0" prefWidth="85.0"
-                text="Vbox popup">
+        <Button mnemonicParsing="false" onAction="#deleteDir" prefHeight="37.0" prefWidth="85.0"
+                text="Delete Dir">
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
