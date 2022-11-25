@@ -1,6 +1,7 @@
 package com.example.cmdlinedemo;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -39,7 +40,7 @@ public class HelloController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         mainAppStage = HelloApplication.myStage;
-
+popStage= new Stage();
         System.out.println("Initialised");
         runtime = Runtime.getRuntime();
         testDir = new File("Desktop");
@@ -96,13 +97,24 @@ public class HelloController implements Initializable {
         testDir = new File("Desktop");
 
         testDir.mkdir();
-
+        popStage.hide();
 
     }
 
     public void deleteDir() {
 
         testDir.delete();
+        popStage.hide();
+    }
+
+    public void loadPopout() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("reuse.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+      //  Stage stage = new Stage();
+        popStage.setScene(scene);
+        popStage.initStyle(StageStyle.UNDECORATED);
+        popStage.show();
+
 
     }
 }
