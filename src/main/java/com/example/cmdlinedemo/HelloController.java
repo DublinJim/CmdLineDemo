@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -17,19 +19,18 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
     private static Stage popStage;
-    private static Stage popStageFail;
     public String fxml;
     public Text txt1;
+    public Text txtReuse;
+    public Pane rootPane;
+    public Button delDirBtn;
+    public Button makeDirBtn;
     private File testDir;
-    private Stage mainAppStage;
     private Runtime runtime;
 
 
     private static void loadPop() throws IOException {
-
-
-     stageSwitcher("pop.fxml");
-
+        stageSwitcher("pop.fxml");
     }
 
     private static void stageSwitcher(String fxml) throws IOException {
@@ -63,17 +64,14 @@ public class HelloController implements Initializable {
 
     public void loadFxmlPopup() throws IOException {
         loadPop();
-
     }
 
     public void restartAll() {
         Platform.exit();
-
     }
 
     public void loadCheckPop() throws IOException {
-
-        fxml="failsafePop.fxml";
+        fxml = "failsafePop.fxml";
         stageSwitcher(fxml);
     }
 
@@ -98,7 +96,17 @@ public class HelloController implements Initializable {
     public void deleteDir() {
 
         testDir.delete();
-        popStage.hide();
+
+        txtReuse.setText("Directory deleted");
+        delDirBtn.setLayoutX(110);
+
+        delDirBtn.setText("ok");
+        rootPane.getChildren().remove(makeDirBtn);
+
+        delDirBtn.setOnAction(e -> {
+            popStage.hide();
+        });
+
     }
 
     public void loadPopout() throws IOException {
