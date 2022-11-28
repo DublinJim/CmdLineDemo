@@ -89,7 +89,8 @@ public class HelloController implements Initializable {
 
         testDir = new File("Desktop");
         testDir.mkdir();
-        popStage.hide();
+        txtReuse.setText("Directory Created");
+        buttonOkMiddle();
 
     }
 
@@ -97,16 +98,16 @@ public class HelloController implements Initializable {
 
         testDir.delete();
 
-        txtReuse.setText("Directory deleted");
+        txtReuse.setText("Directory Deleted");
+        buttonOkMiddle();
+
+    }
+
+    private void buttonOkMiddle() {
         delDirBtn.setLayoutX(110);
-
-        delDirBtn.setText("ok");
+        delDirBtn.setText("Ok");
         rootPane.getChildren().remove(makeDirBtn);
-
-        delDirBtn.setOnAction(e -> {
-            popStage.hide();
-        });
-
+        delDirBtn.setOnAction(e -> popStage.hide());
     }
 
     public void loadPopout() throws IOException {
