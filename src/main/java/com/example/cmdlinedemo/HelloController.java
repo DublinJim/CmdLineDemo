@@ -3,17 +3,14 @@ package com.example.cmdlinedemo;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -21,43 +18,38 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-
     private static Stage popStage;
-    private static Stage popStageFail;
-    private Stage mainAppStage;
+    public String fxml;
     public Text txt1;
+    public Text txtReuse;
+    public Pane rootPane;
+    public Button delDirBtn;
+    public Button makeDirBtn;
+    private File testDir;
     private Runtime runtime;
-    private Popup popup;
-    private Label popupLbl;
 
 
+    private static void loadPop() throws IOException {
+        stageSwitcher("pop.fxml");
+    }
+
+    private static void stageSwitcher(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));
+        Scene scene = new Scene(fxmlLoader.load());
+        popStage.setScene(scene);
+        popStage.initStyle(StageStyle.UNDECORATED);
+        popStage.show();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        mainAppStage = HelloApplication.myStage;
-        popupLbl = new Label("Warning");
-        popup = new Popup();
-        System.out.println("Initialised");
-        runtime = Runtime.getRuntime();
-    }
-
-
-    private static void loadPop() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pop.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
         popStage = new Stage();
-        popStage.initStyle(StageStyle.UNDECORATED);
-        popStage.setTitle("popup");
-        popStage.setScene(scene);
-        popStage.show();
-
+        runtime = Runtime.getRuntime();
+        testDir = new File("Desktop");
     }
-
-
 
     public void dosCommand() throws IOException {
-
 
         String[] cmdArray = new String[2];
         cmdArray[0] = "notepad.exe";
@@ -70,68 +62,17 @@ public class HelloController implements Initializable {
 
     }
 
-
-
-    public void popUpWindow() {
-
-        popupLbl.setText("Warning.  selecting Close will end the application");
-        popupLbl.setPadding(new Insets(10.0));
-        Button noBtn = new Button("Close");
-        Button yesBtn = new Button("Option 2");
-        noBtn.setPadding(new Insets(10));
-        yesBtn.setPadding(new Insets(10));
-        popupLbl.setMinWidth(50);
-        popupLbl.setMinHeight(50);
-        popupLbl.setStyle("-fx-background-color: gray;");
-        HBox optContainer = new HBox(noBtn, yesBtn, popupLbl);
-        optContainer.setPrefSize(880, 220);
-        optContainer.setPadding(new Insets(10));
-        optContainer.setSpacing(10.0);
-        popup.getContent().add(optContainer);
-        mainAppStage = HelloApplication.myStage;
-        popup.show(mainAppStage);
-        noBtn.setOnAction(actionEvent1 -> {
-            popup.hide();
-            System.out.println("in func");
-            Platform.exit();
-        });
-    }
-
-    public void popUpWindowVbox() {
-//here we go
-
-        popupLbl.setText("2nd label");
-
-        Button secondPopUpButton = new Button("new button");
-        secondPopUpButton.setPadding(new Insets(10));
-        VBox optContainer = new VBox(secondPopUpButton, popupLbl);
-        popup.getContent().add(optContainer);
-        mainAppStage = HelloApplication.myStage;
-        popup.show(mainAppStage);
-        System.out.println("done");
-    }
-
     public void loadFxmlPopup() throws IOException {
         loadPop();
-
     }
 
     public void restartAll() {
         Platform.exit();
-
     }
 
-
-
     public void loadCheckPop() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("failsafePop.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        popStageFail = new Stage();
-        popStageFail.initStyle(StageStyle.UNDECORATED);
-        popStageFail.setTitle("popup");
-        popStageFail.setScene(scene);
-        popStageFail.show();
-
+        fxml = "failsafePop.fxml";
+        stageSwitcher(fxml);
     }
 
     public void cancelPop() {
@@ -140,7 +81,37 @@ public class HelloController implements Initializable {
     }
 
     public void cancelFailpop() {
-        popStageFail.hide();
+        popStage.hide();
         cancelPop();
     }
+
+    public void makeDir() {
+
+        testDir = new File("Desktop");
+        testDir.mkdir();
+        txtReuse.setText("Directory Created");
+        buttonOkMiddle();
+
+    }
+
+    public void deleteDir() {
+
+        testDir.delete();
+
+        txtReuse.setText("Directory Deleted");
+        buttonOkMiddle();
+
+    }
+
+    private void buttonOkMiddle() {
+        delDirBtn.setLayoutX(110);
+        delDirBtn.setText("Ok");
+        rootPane.getChildren().remove(makeDirBtn);
+        delDirBtn.setOnAction(e -> popStage.hide());
+    }
+
+    public void loadPopout() throws IOException {
+        stageSwitcher("reuse.fxml");
+    }
+
 }
